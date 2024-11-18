@@ -1,20 +1,14 @@
-import os
 import streamlit as st
 
-# 获取环境变量
-file_path = os.getenv('FILE_PATH')
+# 创建文件上传器
+uploaded_file = st.file_uploader("Choose a file")
 
-if file_path:
-    try:
-        # 读取文件内容
-        with open(file_path, 'r') as file:
-            content = file.read()
-        
-        # 在Streamlit页面中显示内容
-        st.write(content)
-    except FileNotFoundError:
-        st.error(f"File not found: {file_path}")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-else:
-    st.error("FILE_PATH environment variable not set")
+if uploaded_file is not None:
+    # 读取文件内容
+    bytes_data = uploaded_file.getvalue()
+    st.write(bytes_data)
+
+    # 如果是文本文件，可以解码成字符串
+    if uploaded_file.type == "text/plain":
+        string_data = bytes_data.decode('utf-8')
+        st.write(string_data)
