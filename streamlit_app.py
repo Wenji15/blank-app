@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 
+set FILE_PATH=F:\jupyter_work\da_tool\project\flow_result\yejian(1).csv
 # 获取环境变量
 file_path = os.getenv('FILE_PATH')
 
